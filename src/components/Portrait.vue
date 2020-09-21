@@ -67,16 +67,22 @@ export default {
             varying float vTransform;
             varying float vDisplacement;
 
-            void main() {
-              vec2 uv = vUv;
-              float dis = vDisplacement;
-
+            vec4 displace(sampler2D picture, vec2 uv, float dis) {
               float red = texture2D(picture, vec2(uv.x - dis, uv.y + dis)).r;
               float green = texture2D(picture, vec2(uv.x + dis, uv.y - dis)).g;
               float blue = texture2D(picture, vec2(uv.x, uv.y)).b;
               float alpha = texture2D(picture, uv).a;
 
-              gl_FragColor = vec4(red, green, blue, alpha); 
+              return vec4(red, green, blue, alpha); 
+            }
+
+            void main() {
+              vec2 uv = vUv;
+              float dis = vDisplacement;
+
+              vec4 color = displace(picture, uv, dis);
+
+              gl_FragColor = color;
             }
           `,
         }), 
@@ -96,8 +102,9 @@ export default {
 
       gsap.killTweensOf(displacement)
       gsap.to(displacement, {
-        duration: 0.3,
-        value: 0.015,
+        duration: 0.7,
+        value: 0.03,
+        ease: 'power4.out',
       })
     }
 
@@ -106,8 +113,9 @@ export default {
 
       gsap.killTweensOf(displacement)
       gsap.to(displacement, {
-        duration: 1.0,
+        duration: 0.5,
         value: 0.0,
+        ease: 'power4.in',
       })
     }
 
