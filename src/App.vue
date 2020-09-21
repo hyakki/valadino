@@ -1,5 +1,5 @@
 <template>
-  <Portrait class="app__portrait" src="./assets/max.jpg" />
+  <Portrait class="app__portrait" :src="picture" />
 </template>
 
 <style>
@@ -23,6 +23,8 @@ import aladino from './scripts/aladino'
 import { onMounted, ref } from 'vue'
 import Portrait from './components/Portrait.vue'
 
+import picture from './assets/max.jpg'
+
 export default {
   name: 'App',
   components: {
@@ -32,6 +34,10 @@ export default {
     onMounted(() => {
       document.body.appendChild(aladino.canvas)
     })
+
+    return {
+      picture, 
+    }
   },
 }
 </script>
