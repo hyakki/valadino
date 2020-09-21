@@ -1,5 +1,5 @@
 <template>
-  <Portrait class="app__portrait" src="/src/assets/max.jpg" />
+  <Portrait class="app__portrait" src="/max.jpg" />
 </template>
 
 <style>
