@@ -99,7 +99,7 @@ export default {
         }), 
         uniforms: {
           picture: aladino.texture(picture.value.src),
-          displacementPicture: aladino.texture(displacementPicture),
+          displacementPicture: aladino.texture(displacementPicture, { nearest: true }),
           transform: transform.value,
           displacement: displacement.value,
           progress: progress.value,

@@ -41,8 +41,7 @@ export default {
             precision highp float;
 
             uniform float time;
-						uniform float mouseX;
-						uniform float mouseY;
+						uniform vec2 mouse;
 
             varying vec2 vUv;
 
@@ -62,13 +61,10 @@ export default {
             float sdSphere( vec3 p, float s ) {
               return length(p) - s;
             }
-
-            // float sineCrazy(vec3 p) {
-            //   return (sin(p.x) + sin(p.y) + sin(p.z)) / 3.0;
-            // }
-
             float sineCrazy(vec3 p) {
-              return sin(p.x) - sin(p.z) + sin(p.y); 
+              // float coef = 0.9 * ((1.0 - sin(time / 1000.0)) * 1.4);
+              float coef = 1.0;
+              return (sin(p.x * coef) - sin(p.z * coef) + sin(p.y * coef)) / 3.0; 
             }
 
             vec3 getNormal(vec3 p, float r) {
@@ -95,7 +91,8 @@ export default {
               vec2 p = newUV - vec2(0.5);
               // p.x *= resolution.x/resolution.y;
 
-							p.x += mouseX / 60.0;
+							p.x += mouse.x / 60.0;
+              p.y += mouse.y / 60.0;
 
               vec3 camPos = vec3(0.0, 0.0, 2.0);
 
@@ -125,8 +122,7 @@ export default {
           `,
         }),
         uniforms: {
-					mouseX: mouse.value.x,
-					mouseY: mouse.value.y,
+					mouse: [mouse.value.x, mouse.value.y],
 				},
       })
     })
@@ -136,16 +132,14 @@ export default {
 
 			mouse.value = {
 				x: ((clientX / 650) * 2.0) - 1.0,
-				y: clientY
+				y: 1.0 - ((clientY / 650) * 2.0),
 			}
     }
 
     watch(
       () => [mouse.value],
       (v) => {
-				console.log(v[0])
-        carpet.value.uniforms.mouseX = v[0].x
-        carpet.value.uniforms.mouseY = v[0].y
+        carpet.value.uniforms.mouse = [v[0].x, v[0].y]
       }
     )
 

@@ -1,6 +1,6 @@
 <template>
   <Portrait class="app__portrait" :src="picture" v-if="false" />
-  <Sphere class="app__sphere" />
+  <Sphere class="app__sphere" v-if="true" />
 </template>
 
 <style>
