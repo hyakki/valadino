@@ -19,7 +19,7 @@ import gsap from 'gsap'
 import displacementPicture from './../assets/displacement.png'
 
 export default {
-  name: 'Portrait',
+  name: 'portrait',
   props: {
     src: {
       type: String, 

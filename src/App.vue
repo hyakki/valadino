@@ -1,5 +1,6 @@
 <template>
-  <Portrait class="app__portrait" :src="picture" />
+  <Portrait class="app__portrait" :src="picture" v-if="false" />
+  <Sphere class="app__sphere" />
 </template>
 
 <style>
@@ -22,6 +23,7 @@
 import aladino from './scripts/aladino'
 import { onMounted, ref } from 'vue'
 import Portrait from './components/Portrait.vue'
+import Sphere from './components/Sphere.vue'
 
 import picture from './assets/max.jpg'
 
@@ -29,6 +31,7 @@ export default {
   name: 'App',
   components: {
     Portrait,
+    Sphere,
   },
   setup() {
     onMounted(() => {
