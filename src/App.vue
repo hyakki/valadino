@@ -23,7 +23,7 @@
 import aladino from './scripts/aladino'
 import { onMounted, ref } from 'vue'
 import Portrait from './components/Portrait.vue'
-import Sphere from './components/Sphere.vue'
+import Sphere from './components/Sphere/Sphere.vue'
 
 import picture from './assets/max.jpg'
 
